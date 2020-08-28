@@ -9,12 +9,14 @@ import 'package:myapp/pages/_banks.dart';
 import 'package:myapp/pages/_blogDetail.dart';
 import 'package:myapp/pages/_blogsList.dart';
 import 'package:myapp/pages/_categoryList.dart';
+import 'package:myapp/pages/_appliedSavedJob.dart';
 import 'package:myapp/pages/_joblist.dart';
 import 'package:myapp/pages/_latestNews.dart';
 import 'package:myapp/pages/_manPowerDetail.dart';
 import 'package:myapp/pages/_manPowerList.dart';
 import 'package:myapp/pages/_newsDetail.dart';
 import 'package:myapp/pages/_noticeDetail.dart';
+import 'package:myapp/pages/_profile.dart';
 import 'package:myapp/pages/jobDetail.dart';
 import 'package:myapp/pages/noticeList.dart';
 
@@ -57,9 +59,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: color.bg,
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: color.primary,
+        title: Text('Rolling Jobs'),
+        elevation: 0,
         actions: <Widget>[
           // Bell Icon
           IconButton(
@@ -70,1309 +74,1336 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           IconButton(
             icon: FaIcon(FontAwesomeIcons.userCircle),
             iconSize: 20,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => profilePage(),
+              ));
+            },
           ),
         ],
-        centerTitle: true,
-        bottom: _buildBottomBar(),
       ),
       drawer: _buildDrawer(),
       body: ListView(
-        physics: BouncingScrollPhysics(),
-        shrinkWrap: true,
         children: [
-          Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
-                  color: color.secondary,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30.0),
-                      bottomRight: Radius.circular(30.0)),
+          Container(
+            height: 120,
+            width: double.infinity,
+            child: Stack(
+              children: [
+                ClipPath(
+                  child: Container(height: 60, color: color.primary),
                 ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Container(
+                  child: Swiper(
+                    itemCount: 4,
+                    pagination: SwiperPagination(),
+                    autoplay: true,
+                    autoplayDelay: 2,
+                    itemHeight: 150,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: ExactAssetImage('images/banner.jpg'))),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+
+          Container(
+            height: 80,
+            padding: const EdgeInsets.only(top: 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FlatButton(
+                  color: color.primary,
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 14.0, horizontal: 0),
+                    child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 6),
-                            decoration: BoxDecoration(
-                                color: color.primary,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(2))),
-                            child: Text(
-                              'Categories',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),
-                            ),
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: FaIcon(
+                            FontAwesomeIcons.bullhorn,
+                            color: Colors.white,
+                            size: 18,
                           ),
                         ),
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => categoryList(),
-                            ));
-                          },
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(4)),
-                                border: Border.all(color: color.primary)),
-                            child: Text(
-                              'SEE ALL',
-                              style:
-                                  TextStyle(color: color.primary, fontSize: 12),
-                            ),
-                          ),
+                        SizedBox(
+                          height: 4,
                         ),
+                        Text('LT Number',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                            )),
                       ],
                     ),
-                    // Category
-                    Container(
-                      // color: color.secondary,
-                      width: double.infinity,
-                      height: 110,
-                      child: ListView.builder(
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _categoryList(context);
-                        },
-                      ),
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                OutlineButton(
+                  borderSide: BorderSide(color: color.primary),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 0.0, vertical: 15),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: FaIcon(
+                            FontAwesomeIcons.idCard,
+                            size: 18,
+                            color: color.primary,
+                          ),
+                        ),
+                        Text('Work Permit',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: color.primary,
+                            )),
+                      ],
                     ),
-                  ],
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                OutlineButton(
+                  borderSide: BorderSide(color: color.primary),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 0.0, vertical: 15),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: FaIcon(
+                            FontAwesomeIcons.questionCircle,
+                            size: 18,
+                            color: color.primary,
+                          ),
+                        ),
+                        Text('Complains',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: color.primary,
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // End button
+          Container(
+            color: color.secondary,
+            height: 65,
+            padding: EdgeInsets.only(top: 8),
+            margin: EdgeInsets.only(top: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FlatButton(
+                  color: color.primary,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => manPowers(),
+                    ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text('Search Man Powers...',
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                FlatButton(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0)),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => JobList(),
+                    ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Text('Search Jobs...',
+                        style: TextStyle(color: Colors.grey[500])),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            height: 50,
+            color: color.secondary,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
+                  child: FlatButton(
+                      onPressed: () {},
+                      color: color.primary,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Text('ALL (200)',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ))),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
+                  child: FlatButton(
+                      color: Colors.white,
+                      onPressed: () {},
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Nepal (100)',
+                          style: TextStyle(color: Colors.grey[500]),
+                        ),
+                      )),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
+                  child: FlatButton(
+                      onPressed: () {},
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'USA (10)',
+                          style: TextStyle(color: Colors.grey[500]),
+                        ),
+                      )),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
+                  child: FlatButton(
+                      onPressed: () {},
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'China (20)',
+                          style: TextStyle(color: Colors.grey[500]),
+                        ),
+                      )),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
+                  child: FlatButton(
+                      onPressed: () {},
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'India (50)',
+                          style: TextStyle(color: Colors.grey[500]),
+                        ),
+                      )),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 10),
+            decoration: BoxDecoration(
+              color: color.secondary,
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20.0),
+                  bottomRight: Radius.circular(20.0)),
+            ),
+            child: Container(
+              // color: color.secondary,
+              width: double.infinity,
+              height: 90,
+              child: ListView.builder(
+                itemCount: 8,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return _categoryList(context);
+                },
+              ),
+            ),
+          ),
+          Container(
+            height: 65,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FlatButton(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 10),
+                    child: Row(
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.moneyBillWave,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text('Exchange Rate',
+                            style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                FlatButton(
+                  color: color.primary,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 10),
+                    child: Row(
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.calendarDay,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text('Date Converter',
+                            style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Recently Added Job Start
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                      color: color.primary,
+                      borderRadius: BorderRadius.all(Radius.circular(2))),
+                  child: Text(
+                    'Recently Added Job',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
                 ),
               ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => JobList(),
+                  ));
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      border: Border.all(color: color.primary)),
+                  child: Text(
+                    'SEE ALL',
+                    style: TextStyle(color: color.primary, fontSize: 12),
+                  ),
+                ),
+              ),
+            ],
+          ),
 
-              Row(
+          Card(
+            elevation: 0,
+            margin: EdgeInsets.all(0),
+            color: color.secondary,
+            child: InkWell(
+              onTap: () => {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => JobPage()))
+              },
+              child: Row(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => bankLists(),
-                      ));
-                    },
+                  Container(
+                    padding: EdgeInsets.only(left: 18),
+                    height: 80,
+                    width: 100,
+                    child: Image.asset('images/job.jpg'),
+                  ),
+                  Expanded(
                     child: Container(
-                      height: 80,
-                      width: 80,
-                      margin: EdgeInsets.fromLTRB(18, 0, 12, 0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 7,
-                              color: Colors.grey.withOpacity(.5),
-                              spreadRadius: 2,
-                              offset: Offset(0, 3),
-                            ),
-                          ]),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      padding: EdgeInsets.only(left: 15),
+                      width: double.infinity,
+                      child: Row(
                         children: [
-                          FaIcon(
-                            FontAwesomeIcons.moneyBillWave,
-                            color: Colors.orange,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Hotel & Resturant',
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Text(
+                                  'Company Name',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 2.0),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.mapMarkerAlt,
+                                          size: 12,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Nepal, Kathmandu',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 2.0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.clock,
+                                            size: 12,
+                                          ),
+                                        ),
+                                        Text(
+                                          '2 hrs, 30 min',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: Text(
-                              'Bank',
-                              style: TextStyle(
-                                  color: Colors.grey[500], fontSize: 12),
-                            ),
-                          )
+                          IconButton(
+                              onPressed: () {},
+                              icon: FaIcon(
+                                FontAwesomeIcons.heart,
+                                color: Colors.grey[500],
+                              )),
                         ],
                       ),
                     ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 80,
-                    width: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7,
-                            color: Colors.grey.withOpacity(.5),
-                            spreadRadius: 2,
-                            offset: Offset(0, 3),
-                          ),
-                        ]),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.handHoldingMedical,
-                          color: Colors.redAccent,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Text(
-                            'Medical',
-                            style: TextStyle(
-                                color: Colors.grey[500], fontSize: 12),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 80,
-                    width: 80,
-                    margin: EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7,
-                            color: Colors.grey.withOpacity(.5),
-                            spreadRadius: 2,
-                            offset: Offset(0, 3),
-                          ),
-                        ]),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.handHoldingHeart,
-                          color: Colors.green,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Text(
-                            'Insurance',
-                            style: TextStyle(
-                                color: Colors.grey[500], fontSize: 12),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 80,
-                    width: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 7,
-                            color: Colors.grey.withOpacity(.5),
-                            spreadRadius: 2,
-                            offset: Offset(0, 3),
-                          ),
-                        ]),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.chalkboardTeacher,
-                          color: Colors.lime,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Text(
-                            'Orientation',
-                            style: TextStyle(
-                                color: Colors.grey[500], fontSize: 12),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
-              // Recently Added Job Start
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18.0, vertical: 18),
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      decoration: BoxDecoration(
-                          color: color.primary,
-                          borderRadius: BorderRadius.all(Radius.circular(2))),
-                      child: Text(
-                        'Recently Added Job',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => JobList(),
-                      ));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          border: Border.all(color: color.primary)),
-                      child: Text(
-                        'SEE ALL',
-                        style: TextStyle(color: color.primary, fontSize: 12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              Card(
-                elevation: 0,
-                margin: EdgeInsets.all(0),
-                color: color.secondary,
-                child: InkWell(
-                  onTap: () => {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => JobPage()))
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 18),
-                        height: 80,
-                        width: 100,
-                        child: Image.asset('images/job.jpg'),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 15),
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hotel & Resturant',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Text(
-                                      'Company Name',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 2.0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.mapMarkerAlt,
-                                              size: 12,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Nepal, Kathmandu',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 2.0),
-                                              child: FaIcon(
-                                                FontAwesomeIcons.clock,
-                                                size: 12,
-                                              ),
-                                            ),
-                                            Text(
-                                              '2 hrs, 30 min',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: FaIcon(FontAwesomeIcons.star)),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              Card(
-                elevation: 0,
-                margin: EdgeInsets.all(0),
-                color: color.secondary,
-                child: InkWell(
-                  onTap: () => {},
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(left: 18),
-                        height: 80,
-                        width: 100,
-                        child: Image.asset('images/job.jpg'),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: EdgeInsets.only(left: 15),
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hotel & Resturant',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
-                                    child: Text(
-                                      'Company Name',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 2.0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.mapMarkerAlt,
-                                              size: 12,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Nepal, Kathmandu',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10.0),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 2.0),
-                                              child: FaIcon(
-                                                FontAwesomeIcons.clock,
-                                                size: 12,
-                                              ),
-                                            ),
-                                            Text(
-                                              '2 hrs, 30 min',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: FaIcon(FontAwesomeIcons.star)),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Column(
-                children: <Widget>[
-                  Container(
-                    height: 50,
-                    child: TabBar(
-                      tabs: [
-                        Tab(
-                          text: "Manpower",
-                        ),
-                        Tab(text: "Embassy")
-                      ],
-                      indicatorColor: color.primary,
-                      labelColor: color.primary,
-                      controller: _tabController,
-                    ),
-                  ),
-                  Container(
-                    height: 220,
-                    child: TabBarView(controller: _tabController, children: <
-                        Widget>[
-                      Container(
-                        child: Column(
-                          children: [
-                            Card(
-                              elevation: 0,
-                              margin: EdgeInsets.all(0),
-                              child: InkWell(
-                                onTap: () => {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => manPowerDetail(),
-                                  ))
-                                },
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.only(left: 18),
-                                      height: 80,
-                                      width: 100,
-                                      child: Image.asset('images/hotel.jpg'),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.only(left: 15),
-                                        width: double.infinity,
-                                        child: Row(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'The River Overseas Pvt. Ltd',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 8.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        // height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              color.secondary,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)),
-                                                        ),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 4),
-                                                        child: Row(
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          2.0),
-                                                              child: FaIcon(
-                                                                FontAwesomeIcons
-                                                                    .mapMarkerAlt,
-                                                                size: 12,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              'Nepal, Kathmandu',
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        // height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              color.secondary,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)),
-                                                        ),
-                                                        margin: EdgeInsets.only(
-                                                            left: 8),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 4),
-                                                        child: Row(
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          2.0),
-                                                              child: FaIcon(
-                                                                FontAwesomeIcons
-                                                                    .phoneSquareAlt,
-                                                                size: 12,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              '2 hrs ago',
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Divider(),
-                            Card(
-                              elevation: 0,
-                              margin: EdgeInsets.all(0),
-                              child: InkWell(
-                                onTap: () => {},
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.only(left: 18),
-                                      height: 80,
-                                      width: 100,
-                                      child: Image.asset('images/hotel.jpg'),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        padding: EdgeInsets.only(left: 15),
-                                        width: double.infinity,
-                                        child: Row(
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'The River Overseas Pvt. Ltd',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(vertical: 8.0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        // height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              color.secondary,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)),
-                                                        ),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 4),
-                                                        child: Row(
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          2.0),
-                                                              child: FaIcon(
-                                                                FontAwesomeIcons
-                                                                    .mapMarkerAlt,
-                                                                size: 12,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              'Nepal, Kathmandu',
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        // height: 40,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              color.secondary,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          10)),
-                                                        ),
-                                                        margin: EdgeInsets.only(
-                                                            left: 8),
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 10,
-                                                                vertical: 4),
-                                                        child: Row(
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          2.0),
-                                                              child: FaIcon(
-                                                                FontAwesomeIcons
-                                                                    .phoneSquareAlt,
-                                                                size: 12,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              '2 hrs ago',
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => manPowers(),
-                                ));
-                              },
-                              child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 16),
-                                  padding: EdgeInsets.symmetric(vertical: 8),
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4)),
-                                      border: Border.all(
-                                        color: color.primary,
-                                      )),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'SEE ALL',
-                                        style: TextStyle(
-                                            color: Colors.grey[500],
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      FaIcon(
-                                        FontAwesomeIcons.arrowAltCircleRight,
-                                        size: 18,
-                                        color: Colors.grey[500],
-                                      )
-                                    ],
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        child: Text("sign up"),
-                      )
-                    ]),
                   )
                 ],
               ),
+            ),
+          ),
+          SizedBox(
+            height: 6,
+          ),
+          Card(
+            elevation: 0,
+            margin: EdgeInsets.all(0),
+            color: color.secondary,
+            child: InkWell(
+              onTap: () => {},
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 18),
+                    height: 80,
+                    width: 100,
+                    child: Image.asset('images/job.jpg'),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(left: 15),
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Hotel & Resturant',
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.bold),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Text(
+                                  'Company Name',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 2.0),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.mapMarkerAlt,
+                                          size: 12,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Nepal, Kathmandu',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 2.0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.clock,
+                                            size: 12,
+                                          ),
+                                        ),
+                                        Text(
+                                          '2 hrs, 30 min',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: FaIcon(
+                                FontAwesomeIcons.heart,
+                                color: Colors.grey[500],
+                              )),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          // Column(
+          //   children: <Widget>[
+          //     Container(
+          //       height: 50,
+          //       child: TabBar(
+          //         tabs: [
+          //           Tab(
+          //             text: "Manpower",
+          //           ),
+          //           Tab(text: "Embassy")
+          //         ],
+          //         indicatorColor: color.primary,
+          //         labelColor: color.primary,
+          //         controller: _tabController,
+          //       ),
+          //     ),
+          //     Container(
+          //       height: 220,
+          //       child:
+          //           TabBarView(controller: _tabController, children: <Widget>[
+          //         Container(
+          //           child: Column(
+          //             children: [
+          //               Card(
+          //                 elevation: 0,
+          //                 margin: EdgeInsets.all(0),
+          //                 child: InkWell(
+          //                   onTap: () => {
+          //                     Navigator.of(context).push(MaterialPageRoute(
+          //                       builder: (context) => manPowerDetail(),
+          //                     ))
+          //                   },
+          //                   child: Row(
+          //                     children: [
+          //                       Container(
+          //                         padding: EdgeInsets.only(left: 18),
+          //                         height: 80,
+          //                         width: 100,
+          //                         child: Image.asset('images/hotel.jpg'),
+          //                       ),
+          //                       Expanded(
+          //                         child: Container(
+          //                           padding: EdgeInsets.only(left: 15),
+          //                           width: double.infinity,
+          //                           child: Row(
+          //                             children: [
+          //                               Column(
+          //                                 crossAxisAlignment:
+          //                                     CrossAxisAlignment.start,
+          //                                 children: [
+          //                                   Text(
+          //                                     'The River Overseas Pvt. Ltd',
+          //                                     style: TextStyle(
+          //                                         fontSize: 18,
+          //                                         fontWeight: FontWeight.bold),
+          //                                   ),
+          //                                   Padding(
+          //                                     padding:
+          //                                         const EdgeInsets.symmetric(
+          //                                             vertical: 8.0),
+          //                                     child: Row(
+          //                                       mainAxisAlignment:
+          //                                           MainAxisAlignment.start,
+          //                                       children: [
+          //                                         Container(
+          //                                           // height: 40,
+          //                                           decoration: BoxDecoration(
+          //                                             color: color.secondary,
+          //                                             borderRadius:
+          //                                                 BorderRadius.all(
+          //                                                     Radius.circular(
+          //                                                         10)),
+          //                                           ),
+          //                                           padding:
+          //                                               EdgeInsets.symmetric(
+          //                                                   horizontal: 10,
+          //                                                   vertical: 4),
+          //                                           child: Row(
+          //                                             children: [
+          //                                               Padding(
+          //                                                 padding:
+          //                                                     const EdgeInsets
+          //                                                             .only(
+          //                                                         right: 2.0),
+          //                                                 child: FaIcon(
+          //                                                   FontAwesomeIcons
+          //                                                       .mapMarkerAlt,
+          //                                                   size: 12,
+          //                                                 ),
+          //                                               ),
+          //                                               Text(
+          //                                                 'Nepal, Kathmandu',
+          //                                                 style: TextStyle(
+          //                                                   fontSize: 12,
+          //                                                 ),
+          //                                               ),
+          //                                             ],
+          //                                           ),
+          //                                         ),
+          //                                         Container(
+          //                                           // height: 40,
+          //                                           decoration: BoxDecoration(
+          //                                             color: color.secondary,
+          //                                             borderRadius:
+          //                                                 BorderRadius.all(
+          //                                                     Radius.circular(
+          //                                                         10)),
+          //                                           ),
+          //                                           margin: EdgeInsets.only(
+          //                                               left: 8),
+          //                                           padding:
+          //                                               EdgeInsets.symmetric(
+          //                                                   horizontal: 10,
+          //                                                   vertical: 4),
+          //                                           child: Row(
+          //                                             children: [
+          //                                               Padding(
+          //                                                 padding:
+          //                                                     const EdgeInsets
+          //                                                             .only(
+          //                                                         right: 2.0),
+          //                                                 child: FaIcon(
+          //                                                   FontAwesomeIcons
+          //                                                       .phoneSquareAlt,
+          //                                                   size: 12,
+          //                                                 ),
+          //                                               ),
+          //                                               Text(
+          //                                                 '2 hrs ago',
+          //                                                 style: TextStyle(
+          //                                                   fontSize: 12,
+          //                                                 ),
+          //                                               ),
+          //                                             ],
+          //                                           ),
+          //                                         ),
+          //                                       ],
+          //                                     ),
+          //                                   )
+          //                                 ],
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                       )
+          //                     ],
+          //                   ),
+          //                 ),
+          //               ),
+          //               Divider(),
+          //               Card(
+          //                 elevation: 0,
+          //                 margin: EdgeInsets.all(0),
+          //                 child: InkWell(
+          //                   onTap: () => {},
+          //                   child: Row(
+          //                     children: [
+          //                       Container(
+          //                         padding: EdgeInsets.only(left: 18),
+          //                         height: 80,
+          //                         width: 100,
+          //                         child: Image.asset('images/hotel.jpg'),
+          //                       ),
+          //                       Expanded(
+          //                         child: Container(
+          //                           padding: EdgeInsets.only(left: 15),
+          //                           width: double.infinity,
+          //                           child: Row(
+          //                             children: [
+          //                               Column(
+          //                                 crossAxisAlignment:
+          //                                     CrossAxisAlignment.start,
+          //                                 children: [
+          //                                   Text(
+          //                                     'The River Overseas Pvt. Ltd',
+          //                                     style: TextStyle(
+          //                                         fontSize: 18,
+          //                                         fontWeight: FontWeight.bold),
+          //                                   ),
+          //                                   Padding(
+          //                                     padding:
+          //                                         const EdgeInsets.symmetric(
+          //                                             vertical: 8.0),
+          //                                     child: Row(
+          //                                       mainAxisAlignment:
+          //                                           MainAxisAlignment.start,
+          //                                       children: [
+          //                                         Container(
+          //                                           // height: 40,
+          //                                           decoration: BoxDecoration(
+          //                                             color: color.secondary,
+          //                                             borderRadius:
+          //                                                 BorderRadius.all(
+          //                                                     Radius.circular(
+          //                                                         10)),
+          //                                           ),
+          //                                           padding:
+          //                                               EdgeInsets.symmetric(
+          //                                                   horizontal: 10,
+          //                                                   vertical: 4),
+          //                                           child: Row(
+          //                                             children: [
+          //                                               Padding(
+          //                                                 padding:
+          //                                                     const EdgeInsets
+          //                                                             .only(
+          //                                                         right: 2.0),
+          //                                                 child: FaIcon(
+          //                                                   FontAwesomeIcons
+          //                                                       .mapMarkerAlt,
+          //                                                   size: 12,
+          //                                                 ),
+          //                                               ),
+          //                                               Text(
+          //                                                 'Nepal, Kathmandu',
+          //                                                 style: TextStyle(
+          //                                                   fontSize: 12,
+          //                                                 ),
+          //                                               ),
+          //                                             ],
+          //                                           ),
+          //                                         ),
+          //                                         Container(
+          //                                           // height: 40,
+          //                                           decoration: BoxDecoration(
+          //                                             color: color.secondary,
+          //                                             borderRadius:
+          //                                                 BorderRadius.all(
+          //                                                     Radius.circular(
+          //                                                         10)),
+          //                                           ),
+          //                                           margin: EdgeInsets.only(
+          //                                               left: 8),
+          //                                           padding:
+          //                                               EdgeInsets.symmetric(
+          //                                                   horizontal: 10,
+          //                                                   vertical: 4),
+          //                                           child: Row(
+          //                                             children: [
+          //                                               Padding(
+          //                                                 padding:
+          //                                                     const EdgeInsets
+          //                                                             .only(
+          //                                                         right: 2.0),
+          //                                                 child: FaIcon(
+          //                                                   FontAwesomeIcons
+          //                                                       .phoneSquareAlt,
+          //                                                   size: 12,
+          //                                                 ),
+          //                                               ),
+          //                                               Text(
+          //                                                 '2 hrs ago',
+          //                                                 style: TextStyle(
+          //                                                   fontSize: 12,
+          //                                                 ),
+          //                                               ),
+          //                                             ],
+          //                                           ),
+          //                                         ),
+          //                                       ],
+          //                                     ),
+          //                                   )
+          //                                 ],
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                       ),
+          //                     ],
+          //                   ),
+          //                 ),
+          //               ),
+          //               InkWell(
+          //                 onTap: () {
+          //                   Navigator.of(context).push(MaterialPageRoute(
+          //                     builder: (context) => manPowers(),
+          //                   ));
+          //                 },
+          //                 child: Container(
+          //                     margin: EdgeInsets.symmetric(horizontal: 16),
+          //                     padding: EdgeInsets.symmetric(vertical: 8),
+          //                     decoration: BoxDecoration(
+          //                         borderRadius:
+          //                             BorderRadius.all(Radius.circular(4)),
+          //                         border: Border.all(
+          //                           color: color.primary,
+          //                         )),
+          //                     child: Row(
+          //                       mainAxisAlignment: MainAxisAlignment.center,
+          //                       children: [
+          //                         Text(
+          //                           'SEE ALL',
+          //                           style: TextStyle(
+          //                               color: Colors.grey[500],
+          //                               fontWeight: FontWeight.bold),
+          //                         ),
+          //                         SizedBox(
+          //                           width: 4,
+          //                         ),
+          //                         FaIcon(
+          //                           FontAwesomeIcons.arrowAltCircleRight,
+          //                           size: 18,
+          //                           color: Colors.grey[500],
+          //                         )
+          //                       ],
+          //                     )),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //         Container(
+          //           child: Text("sign up"),
+          //         )
+          //       ]),
+          //     )
+          //   ],
+          // ),
+
+          // Start Latest News
+          // Recently Added Job Start
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               Padding(
-                padding: const EdgeInsets.only(top: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FlatButton(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
                       color: color.primary,
-                      onPressed: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 5),
-                        child: Row(
+                      borderRadius: BorderRadius.all(Radius.circular(2))),
+                  child: Text(
+                    'Latest News',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => latestNews(),
+                  ));
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      border: Border.all(color: color.primary)),
+                  child: Text(
+                    'SEE ALL',
+                    style: TextStyle(color: color.primary, fontSize: 12),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Card(
+              elevation: 0,
+              margin: EdgeInsets.all(0),
+              color: color.bg,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(4),
+                onTap: () => {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => newsDetail(),
+                  )),
+                },
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text(
+                              'Government looks for more loans',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
                             Padding(
-                              padding: const EdgeInsets.only(right: 6.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.bullhorn,
-                                color: Colors.white,
-                                size: 14,
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                'While the government response to the virus has not been up to the mark, it has also failed to ensure risk communication and make...',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
-                            Text('LT Number',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                )),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 2.0),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.asterisk,
+                                        color: Colors.grey,
+                                        size: 12,
+                                      ),
+                                    ),
+                                    Text(
+                                      'ekantipur.com',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 2.0),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.clock,
+                                          color: Colors.grey,
+                                          size: 12,
+                                        ),
+                                      ),
+                                      Text(
+                                        '30 min ago',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    OutlineButton(
-                      borderSide: BorderSide(color: color.primary),
-                      onPressed: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5.0, vertical: 14),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 6.0),
-                              child: FaIcon(
-                                FontAwesomeIcons.idCard,
-                                color: color.primary,
-                                size: 14,
-                              ),
-                            ),
-                            Text('Work Permit',
-                                style: TextStyle(
-                                  color: color.primary,
-                                )),
-                          ],
-                        ),
-                      ),
-                    ),
+                    _buildThumbnail(),
                   ],
                 ),
               ),
-              // End button
-
-              // Start Latest News
-              // Recently Added Job Start
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18.0, vertical: 18),
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      decoration: BoxDecoration(
-                          color: color.primary,
-                          borderRadius: BorderRadius.all(Radius.circular(2))),
-                      child: Text(
-                        'Latest News',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => latestNews(),
-                      ));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          border: Border.all(color: color.primary)),
-                      child: Text(
-                        'SEE ALL',
-                        style: TextStyle(color: color.primary, fontSize: 12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Card(
-                  elevation: 0,
-                  margin: EdgeInsets.all(0),
-                  color: color.bg,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(4),
-                    onTap: () => {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => newsDetail(),
-                      )),
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+          ),
+          Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Card(
+              elevation: 0,
+              margin: EdgeInsets.all(0),
+              color: color.bg,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(4),
+                onTap: () => {},
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Government looks for more loans',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                'While the government response to the virus has not been up to the mark, it has also failed to ensure risk communication and make...',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Government looks for more loans',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Text(
-                                    'While the government response to the virus has not been up to the mark, it has also failed to ensure risk communication and make...',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 2.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.asterisk,
-                                            color: Colors.grey,
-                                            size: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          'ekantipur.com',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
                                     Padding(
                                       padding:
-                                          const EdgeInsets.only(left: 10.0),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 2.0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.clock,
-                                              color: Colors.grey,
-                                              size: 12,
-                                            ),
-                                          ),
-                                          Text(
-                                            '30 min ago',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ],
+                                          const EdgeInsets.only(right: 2.0),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.asterisk,
+                                        color: Colors.grey,
+                                        size: 12,
                                       ),
-                                    )
+                                    ),
+                                    Text(
+                                      'ekantipur.com',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                                   ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        _buildThumbnail(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Card(
-                  elevation: 0,
-                  margin: EdgeInsets.all(0),
-                  color: color.bg,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(4),
-                    onTap: () => {},
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Government looks for more loans',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Text(
-                                    'While the government response to the virus has not been up to the mark, it has also failed to ensure risk communication and make...',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 2.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.asterisk,
-                                            color: Colors.grey,
-                                            size: 12,
-                                          ),
+                                  padding: const EdgeInsets.only(left: 10.0),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 2.0),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.clock,
+                                          color: Colors.grey,
+                                          size: 12,
                                         ),
-                                        Text(
-                                          'ekantipur.com',
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 10.0),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 2.0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.clock,
-                                              color: Colors.grey,
-                                              size: 12,
-                                            ),
-                                          ),
-                                          Text(
-                                            '30 min ago',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ],
                                       ),
-                                    )
-                                  ],
-                                ),
+                                      Text(
+                                        '30 min ago',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
-                          ),
+                          ],
                         ),
-                        _buildThumbnail(),
-                      ],
+                      ),
                     ),
-                  ),
+                    _buildThumbnail(),
+                  ],
                 ),
               ),
-              // End News section
+            ),
+          ),
+          // End News section
 
-              // Start Notice
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18.0, vertical: 18),
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      decoration: BoxDecoration(
-                          color: color.primary,
-                          borderRadius: BorderRadius.all(Radius.circular(2))),
-                      child: Text(
-                        'Notices',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => noticeList(),
-                      ));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          border: Border.all(color: color.primary)),
-                      child: Text(
-                        'SEE ALL',
-                        style: TextStyle(color: color.primary, fontSize: 12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+          // Start Notice
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Card(
-                  elevation: 0,
-                  margin: EdgeInsets.all(0),
-                  color: color.bg,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(4),
-                    onTap: () => {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => noticeDetail(),
-                      )),
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Health workers under attack as lack of nder attack as lack of',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Text(
-                                    'While the government response to the virus has not been up to the mark, it has also failed to ensure risk communication and make...',
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Text(
-                            '26 July, 2020',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ),
-                        FaIcon(
-                          FontAwesomeIcons.angleDoubleRight,
-                          size: 18,
-                        )
-                      ],
-                    ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                      color: color.primary,
+                      borderRadius: BorderRadius.all(Radius.circular(2))),
+                  child: Text(
+                    'Notices',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
                   ),
                 ),
               ),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Card(
-                  elevation: 0,
-                  margin: EdgeInsets.all(0),
-                  color: color.bg,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(4),
-                    onTap: () => {},
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Health workers under attack as lack of nder attack as lack of',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Text(
-                                    'While the government response to the virus has not been up to the mark, it has also failed to ensure risk communication and make...',
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Text(
-                            '26 July, 2020',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ),
-                        FaIcon(
-                          FontAwesomeIcons.angleDoubleRight,
-                          size: 18,
-                        )
-                      ],
-                    ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => noticeList(),
+                  ));
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      border: Border.all(color: color.primary)),
+                  child: Text(
+                    'SEE ALL',
+                    style: TextStyle(color: color.primary, fontSize: 12),
                   ),
                 ),
               ),
-              // End notice
-              // Start Blog section
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18.0, vertical: 18),
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                      decoration: BoxDecoration(
-                          color: color.primary,
-                          borderRadius: BorderRadius.all(Radius.circular(2))),
-                      child: Text(
-                        'Blogs',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Card(
+              elevation: 0,
+              margin: EdgeInsets.all(0),
+              color: color.bg,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(4),
+                onTap: () => {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => noticeDetail(),
+                  )),
+                },
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Health workers under attack as lack of nder attack as lack of',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                'While the government response to the virus has not been up to the mark, it has also failed to ensure risk communication and make...',
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => blogLists(),
-                      ));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                          border: Border.all(color: color.primary)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Text(
-                        'SEE ALL',
-                        style: TextStyle(color: color.primary, fontSize: 12),
+                        '26 July, 2020',
+                        style: TextStyle(fontSize: 12),
                       ),
                     ),
+                    FaIcon(
+                      FontAwesomeIcons.angleDoubleRight,
+                      size: 18,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+            child: Card(
+              elevation: 0,
+              margin: EdgeInsets.all(0),
+              color: color.bg,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(4),
+                onTap: () => {},
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Health workers under attack as lack of nder attack as lack of',
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: Text(
+                                'While the government response to the virus has not been up to the mark, it has also failed to ensure risk communication and make...',
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        '26 July, 2020',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
+                    FaIcon(
+                      FontAwesomeIcons.angleDoubleRight,
+                      size: 18,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          // End notice
+          // Start Blog section
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 18),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: BoxDecoration(
+                      color: color.primary,
+                      borderRadius: BorderRadius.all(Radius.circular(2))),
+                  child: Text(
+                    'Blogs',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
                   ),
-                ],
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => blogLists(),
+                  ));
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      border: Border.all(color: color.primary)),
+                  child: Text(
+                    'SEE ALL',
+                    style: TextStyle(color: color.primary, fontSize: 12),
+                  ),
+                ),
               ),
             ],
           ),
@@ -1494,97 +1525,48 @@ Container _buildThumbnail() {
 }
 
 Widget _categoryList(BuildContext context) {
-  return InkWell(
-    onTap: () {},
-    child: Column(
-      children: [
-        Container(
-          height: 60,
-          width: 60,
-          margin: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-          child: CircleAvatar(
-            backgroundColor: color.primary,
-            maxRadius: 30,
-            child: FaIcon(
-              FontAwesomeIcons.home,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        Text('Hotel')
-      ],
-    ),
-  );
-}
-
-PreferredSize _buildBottomBar() {
-  return PreferredSize(
-    child: Container(
-      decoration: BoxDecoration(
-          color: color.primary,
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30))),
-      padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-            child: Text(
-              'Find Your Job',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          Card(
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  new DropdownButton<String>(
-                    hint: Text('County'),
-                    items: <String>['Nepal', 'India', 'China', 'UK']
-                        .map((String value) {
-                      return new DropdownMenuItem<String>(
-                        value: value,
-                        child: new Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
-                  ),
-                  new DropdownButton<String>(
-                    hint: Text('Full Time'),
-                    items: <String>['Nepal', 'India', 'China', 'UK']
-                        .map((String value) {
-                      return new DropdownMenuItem<String>(
-                        value: value,
-                        child: new Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
-                  ),
-                  new DropdownButton<String>(
-                    hint: Text('Freelance'),
-                    items: <String>['Nepal', 'India', 'China', 'UK']
-                        .map((String value) {
-                      return new DropdownMenuItem<String>(
-                        value: value,
-                        child: new Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
-                  ),
-                ],
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => bankLists(),
+        ));
+      },
+      child: Container(
+        height: 40,
+        width: 80,
+        margin: EdgeInsets.fromLTRB(15, 0, 0, 2),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 7,
+                color: Colors.grey.withOpacity(.5),
+                spreadRadius: 2,
+                offset: Offset(0, 3),
               ),
+            ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FaIcon(
+              FontAwesomeIcons.moneyBillWave,
+              color: Colors.orange,
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text(
+                'Bank',
+                style: TextStyle(color: Colors.grey[500], fontSize: 12),
+              ),
+            )
+          ],
+        ),
       ),
     ),
-    preferredSize: Size.fromHeight(100.0),
   );
 }
 
@@ -1604,15 +1586,15 @@ Widget _buildNavBar() {
       ),
       BottomNavigationBarItem(
         icon: FaIcon(FontAwesomeIcons.shoppingBag),
+        title: Text('Recommended Jobs'),
+      ),
+      BottomNavigationBarItem(
+        icon: FaIcon(FontAwesomeIcons.star),
         title: Text('Jobs'),
       ),
       BottomNavigationBarItem(
         icon: FaIcon(FontAwesomeIcons.newspaper),
         title: Text('News'),
-      ),
-      BottomNavigationBarItem(
-        icon: FaIcon(FontAwesomeIcons.bell),
-        title: Text('Notification'),
       ),
       BottomNavigationBarItem(
         icon: FaIcon(FontAwesomeIcons.ellipsisV),
