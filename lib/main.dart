@@ -36,14 +36,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   TabController _tabController;
+  bool _isVisibleManpower = true;
+  bool _isVisibleJob = false;
+
   final SwiperController _controller = SwiperController();
   final int _pageCount = 3;
   int _currentIndex = 0;
-  final List<String> titles = [
-    "Lorem ipsum dolor \nsit amet, consectetur adipiscing \n elit placerat. ",
-    "Aliquam eget justo \n nec arcu ultricies elementum \n id at metus. ",
-    "Nulla facilisi. \nFusce non tempus risus.\n Sed ultrices scelerisque sem,"
-  ];
+  void showHide($value) {
+    setState(() {
+      if ($value == 'manpower') {
+        _isVisibleManpower = true;
+        _isVisibleJob = false;
+      } else {
+        _isVisibleJob = true;
+        _isVisibleManpower = false;
+      }
+    });
+  }
+
   @override
   void initState() {
 // TODO: implement initState
@@ -216,148 +226,830 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FlatButton(
-                  color: color.primary,
+                  color: Colors.white,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => manPowers(),
-                    ));
-                  },
+                  onPressed: () => showHide("manpower"),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Text('Search Man Powers...',
-                        style: TextStyle(color: Colors.white)),
+                        style: TextStyle(color: Colors.grey[500])),
                   ),
                 ),
                 SizedBox(
                   width: 8,
                 ),
                 FlatButton(
-                  color: Colors.white,
+                  color: color.primary,
+                  onPressed: () => showHide("job"),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(0)),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => JobList(),
-                    ));
-                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Text('Search Jobs...',
-                        style: TextStyle(color: Colors.grey[500])),
+                        style: TextStyle(color: Colors.white)),
                   ),
                 )
               ],
             ),
           ),
-          Container(
-            height: 50,
-            color: color.secondary,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                  child: FlatButton(
-                      onPressed: () {},
-                      color: color.primary,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Text('ALL (200)',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ))),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                  child: FlatButton(
-                      color: Colors.white,
-                      onPressed: () {},
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Nepal (100)',
-                          style: TextStyle(color: Colors.grey[500]),
+          _isVisibleManpower
+              ? Container(
+                  height: 120,
+                  color: color.secondary,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 6, 0, 6),
+                          child: Text(
+                            'Locations',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[600]),
+                          ),
                         ),
-                      )),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                  child: FlatButton(
-                      onPressed: () {},
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'USA (10)',
-                          style: TextStyle(color: Colors.grey[500]),
+                      ),
+                      Container(
+                        height: 75,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) => manPowers(),
+                                        ));
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: color.primary),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                        ),
+                                        child: Center(
+                                            child: Text(
+                                          'ALL',
+                                          style: TextStyle(
+                                              color: Colors.grey[500],
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('ALL (200)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/nep.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('NEPAL (100)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/ind.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('INDIA (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/nep.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('NEPAL (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/ind.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('INDIA (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/nep.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('NEPAL (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/ind.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('INDIA (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/nep.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('NEPAL (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                          ],
                         ),
-                      )),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                  child: FlatButton(
-                      onPressed: () {},
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'China (20)',
-                          style: TextStyle(color: Colors.grey[500]),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(
+                  height: 240,
+                  color: color.secondary,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 6, 0, 6),
+                          child: Text(
+                            'Locations',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[600]),
+                          ),
                         ),
-                      )),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                  child: FlatButton(
-                      onPressed: () {},
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'India (50)',
-                          style: TextStyle(color: Colors.grey[500]),
+                      ),
+                      Container(
+                        height: 75,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) => manPowers(),
+                                        ));
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border:
+                                              Border.all(color: color.primary),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                        ),
+                                        child: Center(
+                                            child: Text(
+                                          'ALL',
+                                          style: TextStyle(
+                                              color: Colors.grey[500],
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('ALL (200)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/nep.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('NEPAL (100)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/ind.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('INDIA (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/nep.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('NEPAL (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/ind.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('INDIA (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/nep.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('NEPAL (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/ind.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('INDIA (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                            Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 4),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          image: DecorationImage(
+                                              image: ExactAssetImage(
+                                                  'images/flags/nep.png'))),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text('NEPAL (60)',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[500],
+                                        )),
+                                  ],
+                                )),
+                          ],
                         ),
-                      )),
+                      ),
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 6, 0, 6),
+                          child: Text(
+                            'Categories',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[600]),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        // padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                        height: 80,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Column(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) => JobList(),
+                                    ));
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    height: 60,
+                                    margin:
+                                        const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(color: Colors.amber),
+                                      borderRadius: BorderRadius.circular(80),
+                                    ),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.personBooth,
+                                      size: 24,
+                                      color: Colors.amber,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'Labours',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: 60,
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.redAccent),
+                                    borderRadius: BorderRadius.circular(80),
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.handHoldingMedical,
+                                    size: 24,
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'Healths',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: 60,
+                                  width: 60,
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(80),
+                                    border: Border.all(color: Colors.blueGrey),
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.code,
+                                    size: 24,
+                                    color: Colors.blueGrey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'IT',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  alignment: Alignment.center,
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.green),
+                                    borderRadius: BorderRadius.circular(80),
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.utensils,
+                                    size: 24,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'Cook',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: 60,
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.lime),
+                                    borderRadius: BorderRadius.circular(80),
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.userLock,
+                                    size: 24,
+                                    color: Colors.lime,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'Security',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  height: 60,
+                                  width: 60,
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.redAccent),
+                                    borderRadius: BorderRadius.circular(80),
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.handHoldingMedical,
+                                    size: 24,
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'Healths',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  alignment: Alignment.center,
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(80),
+                                    border: Border.all(color: Colors.blueGrey),
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.code,
+                                    size: 24,
+                                    color: Colors.blueGrey,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'IT',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  alignment: Alignment.center,
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.green),
+                                    borderRadius: BorderRadius.circular(80),
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.utensils,
+                                    size: 24,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'Cook',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  alignment: Alignment.center,
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(color: Colors.lime),
+                                    borderRadius: BorderRadius.circular(80),
+                                  ),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.userLock,
+                                    size: 24,
+                                    color: Colors.lime,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4.0),
+                                  child: Text(
+                                    'Security',
+                                    style: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10),
-            decoration: BoxDecoration(
-              color: color.secondary,
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20.0),
-                  bottomRight: Radius.circular(20.0)),
-            ),
-            child: Container(
-              // color: color.secondary,
-              width: double.infinity,
-              height: 90,
-              child: ListView.builder(
-                itemCount: 8,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  return _categoryList(context);
-                },
-              ),
-            ),
-          ),
           Container(
             height: 65,
             child: Row(
@@ -415,6 +1107,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                 ),
               ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 0),
+            child: Container(
+              // color: color.secondary,
+              width: double.infinity,
+              height: 80,
+              child: ListView.builder(
+                itemCount: 8,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return _bankLists(context);
+                },
+              ),
             ),
           ),
 
@@ -1524,7 +2231,7 @@ Container _buildThumbnail() {
   );
 }
 
-Widget _categoryList(BuildContext context) {
+Widget _bankLists(BuildContext context) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8.0),
     child: InkWell(

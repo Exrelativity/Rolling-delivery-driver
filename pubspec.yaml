@@ -59,6 +59,9 @@ flutter:
     - images/hotel.jpg
     - images/job.jpg
     - images/banner.jpg
+    - images/flags/aus.jpg
+    - images/flags/ind.png
+    - images/flags/nep.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

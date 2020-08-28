@@ -44,9 +44,9 @@ class Lists extends StatelessWidget {
       children: [
         Container(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 6, 0, 0),
+            padding: const EdgeInsets.fromLTRB(16, 6, 0, 6),
             child: Text(
-              'Location',
+              'Locations',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -54,198 +54,37 @@ class Lists extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          height: 50,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: FlatButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Text('ALL (200)')),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: OutlineButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Nepal (200)',
-                        style: TextStyle(color: Colors.grey[500]),
-                      ),
-                    )),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: OutlineButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'USA (10)',
-                        style: TextStyle(color: Colors.grey[500]),
-                      ),
-                    )),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: OutlineButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'China (20)',
-                        style: TextStyle(color: Colors.grey[500]),
-                      ),
-                    )),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: OutlineButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'India (50)',
-                        style: TextStyle(color: Colors.grey[500]),
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          color: Colors.grey[200],
-          margin: EdgeInsets.only(top: 4),
-          child: InkWell(
-            onTap: () => {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(builder: (context) => manPowerDetail),
-              // ),
-            },
+        Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
             child: Row(
               children: [
-                Container(
-                  padding: EdgeInsets.only(left: 18),
-                  height: 80,
-                  width: 100,
-                  child: Image.asset('images/hotel.jpg'),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 15),
-                    width: double.infinity,
-                    child: Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'The River Overseas Pvt. Ltd',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    // height: 40,
-                                    decoration: BoxDecoration(
-                                      color: color.secondary,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 4),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 2.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.mapMarkerAlt,
-                                            color: Colors.grey[600],
-                                            size: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Nepal, Kathmandu',
-                                          style: TextStyle(
-                                            color: Colors.grey[600],
-                                            fontSize: 12,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    // height: 40,
-                                    decoration: BoxDecoration(
-                                      color: color.secondary,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    margin: EdgeInsets.only(left: 8),
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 4),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 2.0),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.phoneSquareAlt,
-                                            color: Colors.grey[600],
-                                            size: 12,
-                                          ),
-                                        ),
-                                        Text(
-                                          '9807090909',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey[600]),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                OutlineButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Row(
+                    children: [
+                      Text("ALL"),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      FaIcon(
+                        FontAwesomeIcons.times,
+                        size: 14,
+                      )
+                    ],
                   ),
                 ),
               ],
-            ),
+            )),
+        Divider(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(
+            'We found 100 manpowers',
+            style: TextStyle(color: Colors.grey[600]),
           ),
         ),
+        Divider(),
         Container(
           color: Colors.grey[200],
           margin: EdgeInsets.only(top: 1),

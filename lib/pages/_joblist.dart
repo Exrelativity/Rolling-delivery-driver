@@ -47,9 +47,9 @@ class Lists extends StatelessWidget {
       children: [
         Container(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 6, 0, 0),
+            padding: const EdgeInsets.fromLTRB(16, 6, 0, 6),
             child: Text(
-              'Location',
+              'Locations',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -57,88 +57,28 @@ class Lists extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          height: 50,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: FlatButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Text('ALL (200)')),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: OutlineButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Nepal (200)',
-                        style: TextStyle(color: Colors.grey[500]),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+            child: Row(
+              children: [
+                OutlineButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Row(
+                    children: [
+                      Text("ALL"),
+                      SizedBox(
+                        width: 8,
                       ),
-                    )),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: OutlineButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'USA (10)',
-                        style: TextStyle(color: Colors.grey[500]),
-                      ),
-                    )),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: OutlineButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'China (20)',
-                        style: TextStyle(color: Colors.grey[500]),
-                      ),
-                    )),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-                child: OutlineButton(
-                    onPressed: () {},
-                    color: color.secondary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'India (50)',
-                        style: TextStyle(color: Colors.grey[500]),
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        ),
+                      FaIcon(
+                        FontAwesomeIcons.times,
+                        size: 14,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            )),
         Container(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 6, 0, 6),
@@ -151,258 +91,56 @@ class Lists extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          // padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-          height: 80,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    margin: const EdgeInsets.fromLTRB(8, 0, 0, 0),
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.amber),
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.personBooth,
-                      size: 24,
-                      color: Colors.amber,
-                    ),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+            child: Row(
+              children: [
+                OutlineButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Row(
+                    children: [
+                      Text("IT"),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      FaIcon(
+                        FontAwesomeIcons.times,
+                        size: 14,
+                      )
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'Labours',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.redAccent),
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.handHoldingMedical,
-                      size: 24,
-                      color: Colors.redAccent,
-                    ),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                OutlineButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Row(
+                    children: [
+                      Text("Cook"),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      FaIcon(
+                        FontAwesomeIcons.times,
+                        size: 14,
+                      )
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'Healths',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 60,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(80),
-                      border: Border.all(color: Colors.blueGrey),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.code,
-                      size: 24,
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'IT',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.green),
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.utensils,
-                      size: 24,
-                      color: Colors.green,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'Cook',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.lime),
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.userLock,
-                      size: 24,
-                      color: Colors.lime,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'Security',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 60,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.redAccent),
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.handHoldingMedical,
-                      size: 24,
-                      color: Colors.redAccent,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'Healths',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(80),
-                      border: Border.all(color: Colors.blueGrey),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.code,
-                      size: 24,
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'IT',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.green),
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.utensils,
-                      size: 24,
-                      color: Colors.green,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'Cook',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    alignment: Alignment.center,
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.lime),
-                      borderRadius: BorderRadius.circular(80),
-                    ),
-                    child: FaIcon(
-                      FontAwesomeIcons.userLock,
-                      size: 24,
-                      color: Colors.lime,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: Text(
-                      'Security',
-                      style: TextStyle(color: Colors.grey[500], fontSize: 12),
-                    ),
-                  )
-                ],
-              ),
-            ],
+                ),
+              ],
+            )),
+        Divider(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(
+            'We found 100 jobs',
+            style: TextStyle(color: Colors.grey[600]),
           ),
         ),
+        Divider(),
         InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
