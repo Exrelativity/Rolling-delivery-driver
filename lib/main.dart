@@ -540,7 +540,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       onTap: () {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(
-                                          builder: (context) => manPowers(),
+                                          builder: (context) => JobList(),
                                         ));
                                       },
                                       child: Container(
