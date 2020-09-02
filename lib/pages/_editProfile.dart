@@ -27,8 +27,8 @@ class _editProfileState extends State<editProfile> {
       ),
       body: Form(
         key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Container(
@@ -41,7 +41,8 @@ class _editProfileState extends State<editProfile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
               child: TextFormField(
                 keyboardType: TextInputType.name,
                 textInputAction: TextInputAction.send,
@@ -52,7 +53,6 @@ class _editProfileState extends State<editProfile> {
                     hintText: "Prajwal Rai"),
                 autofocus: false,
                 autocorrect: false,
-                maxLength: 30,
                 validator: (text) {
                   if (text == null || text.isEmpty) {
                     return 'YOUR NAME REQUIRED';
@@ -62,7 +62,8 @@ class _editProfileState extends State<editProfile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
               child: TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.send,
@@ -83,7 +84,28 @@ class _editProfileState extends State<editProfile> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 16),
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.send,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4))),
+                    labelText: "ENTER PHONE NUMBER",
+                    hintText: "9807009889"),
+                autofocus: false,
+                autocorrect: false,
+                validator: (text) {
+                  if (text == null || text.isEmpty) {
+                    return 'PHONE NUMBER REQUIRED';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8),
               child: TextFormField(
                 keyboardType: TextInputType.datetime,
                 textInputAction: TextInputAction.send,
