@@ -22,8 +22,11 @@ environment:
 
 dependencies:
   font_awesome_flutter: ^8.8.1
-  flutter_swiper: ^1.1.6
-  flutter_screenutil: ^2.3.0
+  flutter_switch: ^0.1.1
+  flutter_google_maps: ^4.0.0
+  google_fonts: ^1.1.0
+  syncfusion_flutter_charts: ^18.2.55
+  dotted_line: ^2.0.1
   flutter:
     sdk: flutter
 

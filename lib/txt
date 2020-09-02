@@ -1,0 +1,425 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:myapp/fancynavbar.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:myapp/colors.dart' as color;
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MainPage(),
+  ));
+}
+
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
+  bool status1 = false;
+  int _currentIndex = 0;
+  List<Widget> _appBars = [];
+  TabController _tabController;
+  @override
+  void initState() {
+    _appBars.add(_buildAppbar());
+    _appBars.add(_buildAppBarOne('profile'));
+    _appBars.add(_buildAppBarOne('dd'));
+
+    _appBars.add(_buildAppBarOne('procccfile'));
+
+    super.initState();
+    _tabController = new TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    indexcontroller.close();
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  PageController pageController = PageController(initialPage: 0);
+  StreamController<int> indexcontroller = StreamController<int>.broadcast();
+  int index = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _appBars[_currentIndex],
+      body: PageView(
+        physics: NeverScrollableScrollPhysics(),
+        onPageChanged: (index) {
+          indexcontroller.add(index);
+        },
+        controller: pageController,
+        children: <Widget>[
+          ListView(
+            physics: BouncingScrollPhysics(),
+            children: [
+              Container(
+                width: double.infinity,
+                child: SfCartesianChart(
+                    primaryXAxis: CategoryAxis(),
+                    // Chart title
+                    title: ChartTitle(text: 'Weekly Summary'),
+                    // Enable legend
+                    // legend: Legend(isVisible: true),
+                    // Enable tooltip
+                    tooltipBehavior: TooltipBehavior(enable: true),
+                    series: <ChartSeries<SalesData, String>>[
+                      LineSeries<SalesData, String>(
+                          dataSource: <SalesData>[
+                            SalesData('Sun', 35),
+                            SalesData('Mon', 28),
+                            SalesData('Tue', 34),
+                            SalesData('Wed', 32),
+                            SalesData('Thu', 40),
+                            SalesData('Fri', 40),
+                            SalesData('Sat', 40)
+                          ],
+                          xValueMapper: (SalesData sales, _) => sales.year,
+                          yValueMapper: (SalesData sales, _) => sales.sales,
+                          // Enable data label
+                          dataLabelSettings: DataLabelSettings(isVisible: true))
+                    ]),
+              ),
+              Column(
+                children: <Widget>[
+                  Container(
+                    height: 50,
+                    child: TabBar(
+                      indicatorColor: color.primary,
+                      labelColor: Colors.white,
+                      labelStyle: TextStyle(fontSize: 14),
+                      unselectedLabelColor: color.primary,
+                      controller: _tabController,
+                      indicator: BoxDecoration(
+                          color: color.primary,
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      tabs: [
+                        Tab(
+                          text: "TODAY",
+                        ),
+                        Tab(text: "WEEEKLY"),
+                        Tab(text: "MONTHLY"),
+                        Tab(text: "LIFETIME"),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 14),
+                    height: 200,
+                    child: TabBarView(controller: _tabController, children: <
+                        Widget>[
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: FlatButton(
+                                    onPressed: () {},
+                                    color: Color(0xffade8f4),
+                                    child: Container(
+                                      height: 80,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text('Earnings',
+                                              style: GoogleFonts.poppins(
+                                                  textStyle: TextStyle(
+                                                      color: Colors.black54))),
+                                          Text('Rs 5,000.00',
+                                              style:
+                                                  GoogleFonts.robotoCondensed(
+                                                      textStyle: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.black54,
+                                                          fontWeight: FontWeight
+                                                              .bold))),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Expanded(
+                                  child: FlatButton(
+                                    onPressed: () {},
+                                    color: Color(0xffcaffbf),
+                                    child: Container(
+                                      height: 80,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text('Delivered',
+                                              style: GoogleFonts.poppins(
+                                                  textStyle: TextStyle(
+                                                      color: Colors.black54))),
+                                          Text('5',
+                                              style:
+                                                  GoogleFonts.robotoCondensed(
+                                                      textStyle: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.black54,
+                                                          fontWeight: FontWeight
+                                                              .bold))),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: FlatButton(
+                                    onPressed: () {},
+                                    color: Color(0xfff8edeb),
+                                    child: Container(
+                                      height: 80,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text('Ongoing',
+                                              style: GoogleFonts.poppins(
+                                                  textStyle: TextStyle(
+                                                      color: Colors.black54))),
+                                          Text('2',
+                                              style:
+                                                  GoogleFonts.robotoCondensed(
+                                                      textStyle: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.black54,
+                                                          fontWeight: FontWeight
+                                                              .bold))),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Expanded(
+                                  child: FlatButton(
+                                    onPressed: () {},
+                                    color: Color(0xffffb5a7),
+                                    child: Container(
+                                      height: 80,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text('Cancelled',
+                                              style: GoogleFonts.poppins(
+                                                  textStyle: TextStyle(
+                                                      color: Colors.black54))),
+                                          Text('2',
+                                              style:
+                                                  GoogleFonts.robotoCondensed(
+                                                      textStyle: TextStyle(
+                                                          fontSize: 20,
+                                                          color: Colors.black54,
+                                                          fontWeight: FontWeight
+                                                              .bold))),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Text("sign up"),
+                      ),
+                      Container(
+                        child: Text("sign up"),
+                      ),
+                      Container(
+                        child: Text("sign up"),
+                      ),
+                    ]),
+                  )
+                ],
+              ),
+            ],
+          ),
+          Center(
+            child: Text('user'),
+          ),
+          Center(
+            child: Text('Security'),
+          ),
+          Center(
+            child: Text('Message'),
+          ),
+        ],
+      ),
+      bottomNavigationBar: StreamBuilder<Object>(
+          initialData: _currentIndex,
+          stream: indexcontroller.stream,
+          builder: (context, snapshot) {
+            int cIndex = snapshot.data;
+            return FancyBottomNavigation(
+              currentIndex: cIndex,
+              items: <FancyBottomNavigationItem>[
+                FancyBottomNavigationItem(
+                    icon: Icon(Icons.dashboard), title: Text('Dashboard')),
+                FancyBottomNavigationItem(
+                    icon: Icon(Icons.location_on), title: Text('Order')),
+                FancyBottomNavigationItem(
+                    icon: Icon(Icons.history), title: Text('History')),
+                FancyBottomNavigationItem(
+                    icon: Icon(Icons.settings), title: Text('Settings')),
+              ],
+              onItemSelected: (int value) {
+                indexcontroller.add(value);
+                pageController.jumpToPage(value);
+                setState(() {
+                  _currentIndex = cIndex;
+                });
+                print(_currentIndex);
+              },
+            );
+          }),
+    );
+  }
+}
+
+class SalesData {
+  SalesData(this.year, this.sales);
+
+  final String year;
+  final double sales;
+}
+
+// Bottom Bar
+PreferredSize _buildBottomBar() {
+  return PreferredSize(
+    child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30))),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        image: DecorationImage(
+                            image: ExactAssetImage('images/user.png'))),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text("Prajwal Rai",
+                              style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18))),
+                          SizedBox(
+                            width: 6,
+                          ),
+                          Container(
+                            height: 10,
+                            width: 10,
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50))),
+                          )
+                        ],
+                      ),
+                      Text(
+                        "09-A67-657",
+                        style: GoogleFonts.robotoCondensed(
+                            textStyle:
+                                TextStyle(color: Colors.white, fontSize: 14)),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
+        )),
+    preferredSize: Size.fromHeight(80),
+  );
+}
+
+Widget _buildAppbar() {
+  AppBar(
+      title: Text('Dashboard',
+          style: GoogleFonts.poppins(
+              textStyle: TextStyle(fontWeight: FontWeight.w500))),
+      actions: [
+        // FlutterSwitch(
+        //   activeColor: Colors.green,
+        //   showOnOff: true,
+        //   width: 90,
+        //   height: 30,
+        //   activeText: 'online',
+        //   inactiveText: 'offline',
+        //   activeTextColor: Colors.white,
+        //   inactiveTextColor: Colors.blue[50],
+        //   value: status1,
+        //   onToggle: (val) {
+        //     setState(() {
+        //       status1 = val;
+        //     });
+        //   },
+        // ),
+        IconButton(
+          icon: FaIcon(
+            FontAwesomeIcons.bell,
+            size: 20,
+          ),
+          onPressed: () {},
+        ),
+      ],
+      bottom: _buildBottomBar());
+}
+
+Widget _buildAppBarOne(String title) {
+  return AppBar(bottom: _buildBottomBar(), title: Text(title));
+}
