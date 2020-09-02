@@ -32,7 +32,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     _children.add(HomePage());
-    _children.add(MyApp());
+    _children.add(OrderPage());
     _children.add(History());
     _children.add(Settings());
 
