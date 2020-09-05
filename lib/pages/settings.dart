@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/colors.dart' as color;
 import 'package:myapp/pages/_profileMenu.dart';
+import 'package:myapp/pages/calendar.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key key}) : super(key: key);
@@ -168,7 +169,11 @@ class Settings extends StatelessWidget {
                         textStyle: TextStyle(color: Colors.grey[500]))),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Calendar(),
+                  ));
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10.0),
                   child: Row(
