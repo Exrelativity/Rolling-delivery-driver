@@ -10,11 +10,21 @@ import 'package:myapp/pages/order.dart';
 import 'package:myapp/pages/settings.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:myapp/colors.dart' as color;
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: MainPage(),
+    localizationsDelegates: [
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    supportedLocales: [
+      const Locale('es'),
+      const Locale('en'),
+    ],
   ));
 }
 

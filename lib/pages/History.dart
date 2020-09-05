@@ -1,3 +1,4 @@
+import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,17 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
+  DateTime _selectedDate;
+  @override
+  void initState() {
+    super.initState();
+    _resetSelectedDate();
+  }
+
+  void _resetSelectedDate() {
+    _selectedDate = DateTime.now().add(Duration(days: 5));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,220 +33,28 @@ class _HistoryState extends State<History> {
         Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Sat May, 2020',
-              style: GoogleFonts.robotoCondensed(
-                textStyle:
-                    TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
-              ),
-            ),
+            child: Text('$_selectedDate',
+                style: GoogleFonts.robotoCondensed(
+                  textStyle:
+                      TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
+                )),
           ),
         ),
-        Container(
-          height: 40,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    // border: Border.all(color: Colors.grey),
-                    color: color.primary,
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Container(
-                height: 80,
-                width: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.all(Radius.circular(150))),
-                child: Center(
-                  child: Text(
-                    '1',
-                    style: GoogleFonts.robotoSlab(
-                        textStyle: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600])),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        CalendarTimeline(
+          initialDate: _selectedDate,
+          firstDate: DateTime.now(),
+          lastDate: DateTime.now().add(Duration(days: 365)),
+          onDateSelected: (date) {
+            setState(() {
+              _selectedDate = date;
+            });
+          },
+          leftMargin: 20,
+          monthColor: color.primary,
+          dayColor: Colors.teal[200],
+          activeDayColor: Colors.white,
+          activeBackgroundDayColor: color.primary,
+          selectableDayPredicate: (date) => date.day != 23,
         ),
         SizedBox(
           height: 10,
